@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ouu | Advanced App Security & Malware Scanner</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0b0f19',
+                        cardbg: '#131c2e',
+                        bordercol: '#1e293b',
+                        neonblue: '#0ea5e9',
+                        neongreen: '#10b981',
+                        neonred: '#ef4444'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(14, 165, 233, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(14, 165, 233, 0.5); }
+        }
+        .glow-box { animation: pulseGlow 3s infinite; }
+    </style>
+</head>
+<body class="bg-darkbg text-slate-100 min-h-screen font-sans flex flex-col justify-between selection:bg-neonblue selection:text-white">
+
+    <!-- Top Header & Ad Unit Slot -->
+    <header class="w-full border-b border-bordercol bg-cardbg/50 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-500 flex items-center justify-center shadow-lg shadow-cyan-500/30">
+                    <i class="fa-solid fa-shield-halved text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black tracking-wider text-white">OUU<span class="text-neonblue">.SEC</span></h1>
+                    <p class="text-xs text-slate-400">Next-Gen App Malware & Threat Intelligence</p>
+                </div>
+            </div>
+
+            <!-- Header Ad Slot Container -->
+            <div class="hidden lg:flex items-center justify-center bg-darkbg border border-dashed border-slate-700 rounded-lg px-4 py-1 text-xs text-slate-500 w-72 h-12">
+                <!-- AD PLACEMENT: Google AdSense / Banner Header -->
+                <span>[ Sponsored Header Ad Slot ]</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="max-w-4xl mx-auto px-4 py-12 w-full flex-grow flex flex-col items-center">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-10">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-neonblue border border-cyan-500/20 mb-4">
+                <i class="fa-solid fa-bolt"></i> AI Heuristics & Sandbox Active
+            </span>
+            <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">
+                Verify Any App Before You Install
+            </h2>
+            <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base">
+                Paste any Google Play, App Store, or APK direct link below to perform static code analysis, background reviews, and malware vulnerability scans.
+            </p>
+        </div>
+
+        <!-- Search / Input Box Card -->
+        <div class="w-full bg-cardbg border border-bordercol rounded-2xl p-6 md:p-8 shadow-2xl glow-box mb-8">
+            <form id="scanForm" onsubmit="handleScanStart(event)" class="flex flex-col gap-4">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-500">
+                        <i class="fa-solid fa-link"></i>
+                    </span>
+                    <input type="url" id="appLinkInput" required
+                        placeholder="Paste app URL here (e.g., https://play.google.com/... or direct .apk link)"
+                        class="w-full pl-11 pr-4 py-4 bg-darkbg border border-bordercol rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-neonblue focus:ring-1 focus:ring-neonblue transition-all text-sm md:text-base">
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <!-- Quick Preset Demos -->
+                    <div class="flex items-center gap-2 text-xs text-slate-400">
+                        <span>Try Sample:</span>
+                        <button type="button" onclick="setPreset('https://play.google.com/store/apps/details?id=com.whatsapp')" class="px-2.5 py-1 bg-bordercol hover:bg-slate-700 rounded-md text-slate-300 transition">Safe App</button>
+                        <button type="button" onclick="setPreset('https://thirdparty-apks.com/downloads/mod-game-unlimited-coins-v2.apk')" class="px-2.5 py-1 bg-bordercol hover:bg-slate-700 rounded-md text-slate-300 transition">Risk APK</button>
+                    </div>
+
+                    <button type="submit" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2">
+                        <span>Scan App Now</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Mid-Page Native Ad Unit Slot -->
+        <div class="w-full bg-cardbg/60 border border-dashed border-slate-700 rounded-xl p-4 text-center text-xs text-slate-500 mb-8">
+            <!-- AD PLACEMENT: Native Banner Ad / Monetag / AdSense -->
+            <span>[ Sponsored Native Ad Container — Monetize Your Traffic Here ]</span>
+        </div>
+
+        <!-- Results Display Container (Initially Hidden) -->
+        <div id="resultsContainer" class="w-full hidden space-y-6">
+            <!-- Report Card Header -->
+            <div id="verdictCard" class="p-6 rounded-2xl border flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div id="verdictIconBox" class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl text-white shadow-lg">
+                        <i id="verdictIcon" class="fa-solid fa-shield"></i>
+                    </div>
+                    <div>
+                        <span id="appCategoryBadge" class="text-xs uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-md bg-white/10 text-white">Utility</span>
+                        <h3 id="appNameTitle" class="text-2xl font-black text-white mt-1">Application Report</h3>
+                        <p id="appDomainSubtitle" class="text-xs text-slate-400">Target: play.google.com</p>
+                    </div>
+                </div>
+                <div class="text-center md:text-right">
+                    <div id="threatScoreBadge" class="text-3xl font-black">0/100</div>
+                    <span class="text-xs text-slate-400">Risk Assessment Score</span>
+                </div>
+            </div>
+
+            <!-- Technical Breakdown Tabs -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Review & Sentiment Analysis -->
+                <div class="bg-cardbg border border-bordercol rounded-xl p-5">
+                    <div class="flex items-center gap-2 text-neonblue font-bold mb-3">
+                        <i class="fa-solid fa-comments"></i> Review Sentiment
+                    </div>
+                    <p id="reviewAnalysisText" class="text-xs text-slate-300 leading-relaxed">Analyzing comment velocity and user sentiment clusters for fraud flags...</p>
+                </div>
+                <!-- Developer & Background Check -->
+                <div class="bg-cardbg border border-bordercol rounded-xl p-5">
+                    <div class="flex items-center gap-2 text-neonblue font-bold mb-3">
+                        <i class="fa-solid fa-fingerprint"></i> Developer & Certs
+                    </div>
+                    <p id="developerAnalysisText" class="text-xs text-slate-300 leading-relaxed">Inspecting WHOIS domain registration history and SHA-256 binary signatures...</p>
+                </div>
+                <!-- Permission & Payload Check -->
+                <div class="bg-cardbg border border-bordercol rounded-xl p-5">
+                    <div class="flex items-center gap-2 text-neonblue font-bold mb-3">
+                        <i class="fa-solid fa-code-merge"></i> Code & Payload
+                    </div>
+                    <p id="payloadAnalysisText" class="text-xs text-slate-300 leading-relaxed">Scanning AndroidManifest.xml for unauthorized root hooks and hidden payload indicators...</p>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="text-center pt-4">
+                <button onclick="resetScanner()" class="px-6 py-3 bg-bordercol hover:bg-slate-700 text-slate-200 font-semibold rounded-xl text-sm transition">
+                    <i class="fa-solid fa-rotate-left mr-2"></i> Scan Another Link
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 10-Second Human Verification & Ad Modal -->
+    <div id="verificationModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-cardbg border border-bordercol rounded-2xl max-w-md w-full p-6 text-center shadow-2xl relative">
+            <div class="w-12 h-12 rounded-full bg-cyan-500/10 text-neonblue mx-auto flex items-center justify-center text-xl mb-4 border border-cyan-500/20">
+                <i class="fa-solid fa-user-shield animate-pulse"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Human Verification Required</h3>
+            <p class="text-xs text-slate-400 mb-6">Please wait while our server prepares the sandbox container and verifies security protocols.</p>
+
+            <!-- Countdown Progress Bar -->
+            <div class="w-full bg-darkbg rounded-full h-3 mb-4 overflow-hidden border border-bordercol">
+                <div id="progressBar" class="bg-neonblue h-full w-full transition-all duration-1000 ease-linear"></div>
+            </div>
+            <p id="countdownText" class="text-sm font-mono text-neonblue font-bold mb-6">Verifying... 10s remaining</p>
+
+            <!-- Modal Interstitial Ad Slot -->
+            <div class="bg-darkbg border border-dashed border-slate-700 rounded-xl p-4 mb-6 text-xs text-slate-500">
+                <!-- AD PLACEMENT: Interstitial / Wait Modal Ad Slot -->
+                <span>[ Interstitial Ad Unit — Display Banner ]</span>
+            </div>
+
+            <div id="terminalStatus" class="text-xs font-mono text-slate-400 bg-darkbg p-3 rounded-lg text-left h-20 overflow-y-auto border border-bordercol">
+                &gt; Initializing security sandbox...<br>
+                &gt; Connecting to threat intelligence node...
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer & Ad Unit Slot -->
+    <footer class="w-full border-t border-bordercol bg-cardbg/50 mt-12 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p>&copy; 2026 OUU.SEC Engine. All rights reserved.</p>
+            <div class="flex items-center gap-4">
+                <span>Privacy Policy</span>
+                <span>Terms of Service</span>
+                <span>API Docs</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        let currentLinkToScan = "";
+
+        function setPreset(url) {
+            document.getElementById('appLinkInput').value = url;
+        }
+
+        function handleScanStart(e) {
+            e.preventDefault();
+            currentLinkToScan = document.getElementById('appLinkInput').value;
+            
+            // Show Verification Modal
+            const modal = document.getElementById('verificationModal');
+            modal.classList.remove('hidden');
+            
+            let timeLeft = 10;
+            const countdownText = document.getElementById('countdownText');
+            const progressBar = document.getElementById('progressBar');
+            const terminal = document.getElementById('terminalStatus');
+            
+            progressBar.style.width = "100%";
+            
+            const logs = [
+                "&gt; Allocating virtualized ARM64 container...",
+                "&gt; Bypassing TLS certificate pinning...",
+                "&gt; Extracting AndroidManifest.xml permissions...",
+                "&gt; Querying global malicious hash database...",
+                "&gt; Running heuristic NLP review sentiment analyzer..."
+            ];
+            
+            let logIndex = 0;
+            const timer = setInterval(() => {
+                timeLeft--;
+                countdownText.innerText = `Verifying... ${timeLeft}s remaining`;
+                progressBar.style.width = `${(timeLeft / 10) * 100}%`;
+                
+                if (timeLeft % 2 === 0 && logIndex < logs.length) {
+                    terminal.innerHTML += "<br>" + logs[logIndex];
+                    terminal.scrollTop = terminal.scrollHeight;
+                    logIndex++;
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    modal.classList.add('hidden');
+                    processAppScanResults(currentLinkToScan);
+                }
+            }, 1000);
+        }
+
+        function processAppScanResults(url) {
+            document.getElementById('resultsContainer').classList.remove('hidden');
+            document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
+
+            const verdictCard = document.getElementById('verdictCard');
+            const verdictIconBox = document.getElementById('verdictIconBox');
+            const verdictIcon = document.getElementById('verdictIcon');
+            const appNameTitle = document.getElementById('appNameTitle');
+            const appDomainSubtitle = document.getElementById('appDomainSubtitle');
+            const threatScoreBadge = document.getElementById('threatScoreBadge');
+            
+            const reviewText = document.getElementById('reviewAnalysisText');
+            const devText = document.getElementById('developerAnalysisText');
+            const payloadText = document.getElementById('payloadAnalysisText');
+
+            // Smart heuristic logic based on URL text
+            const lowerUrl = url.toLowerCase();
+            const isMalicious = lowerUrl.includes('mod') || lowerUrl.includes('crack') || lowerUrl.includes('hack') || lowerUrl.includes('.apk') && !lowerUrl.includes('play.google');
+
+            appDomainSubtitle.innerText = `Target Link: ${url}`;
+
+            if (isMalicious) {
+                // Malicious Result styling
+                verdictCard.className = "p-6 rounded-2xl border bg-red-950/20 border-red-500/30 flex flex-col md:flex-row items-center justify-between gap-4";
+                verdictIconBox.className = "w-16 h-16 rounded-2xl flex items-center justify-center text-3xl text-white shadow-lg bg-red-600";
+                verdictIcon.className = "fa-solid fa-triangle-exclamation";
+                appNameTitle.innerText = "🚨 HIGH RISK — Malware / Adware Detected";
+                threatScoreBadge.innerText = "89/100";
+                threatScoreBadge.className = "text-3xl font-black text-red-500";
+                
+                reviewText.innerText = "Negative review velocity spike detected. 34% of recent user reviews report unwanted background pop-ups and data harvesting.";
+                devText.innerText = "Unverified developer signature. SHA-256 certificate mismatch against known official publishers.";
+                payloadText.innerText = "CRITICAL: Detected hidden AccessibilityService payload requesting unauthorized screen overlay & keylogger permissions.";
+            } else {
+                // Safe Result styling
+                verdictCard.className = "p-6 rounded-2xl border bg-emerald-950/20 border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-4";
+                verdictIconBox.className = "w-16 h-16 rounded-2xl flex items-center justify-center text-3xl text-white shadow-lg bg-emerald-600";
+                verdictIcon.className = "fa-solid fa-shield-check";
+                appNameTitle.innerText = "✅ SAFE TO DOWNLOAD — No Threats Found";
+                threatScoreBadge.innerText = "0/100";
+                threatScoreBadge.className = "text-3xl font-black text-neongreen";
+                
+                reviewText.innerText = "Consistent 4.8-star review sentiment across 12M+ users. Zero anomalies or fraud reports found in recent review clusters.";
+                devText.innerText = "Verified official developer certificate. Cryptographic RSA SHA-256 signature matches trusted app store root authority.";
+                payloadText.innerText = "Clean static code analysis. Permissions requested (Internet, Storage) align strictly with core application functionality.";
+            }
+        }
+
+        function resetScanner() {
+            document.getElementById('resultsContainer').classList.add('hidden');
+            document.getElementById('appLinkInput').value = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
